@@ -1,35 +1,57 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit, AfterViewInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { DocumentEditorContainerComponent } from '@syncfusion/ej2-angular-documenteditor';
+import { DocumentEditorContainerComponent, TrackChangeEventArgs  } from '@syncfusion/ej2-angular-documenteditor';
 import { environment } from 'src/environments/environment';
+import {staticData} from '../../../../src/data-default';
 
 @Component({
   selector: 'app-document-editor',
   templateUrl: './document-editor.component.html',
   styleUrls: ['./document-editor.component.scss']
 })
-export class DocumentEditorComponent {
+export class DocumentEditorComponent implements OnInit {
   @ViewChild('documentEditorContainer') documentEditorContainer!: DocumentEditorContainerComponent;
 
   constructor(private http: HttpClient) {}
 
-  // Method to handle file change
+  ngOnInit(): void {
+  //   this.documentEditorContainer.documentEditor.currentUser = 'John Doe';
+  // this.documentEditorContainer.documentEditor.enableTrackChanges = true;
+  }
+
+  ngAfterViewInit(): void {
+    setTimeout(() => {
+      this.loadDocumentFromJson();
+    }, 200);
+  }
+
+  private loadDocumentFromJson(): void {
+    this.documentEditorContainer.documentEditor.open(JSON.stringify(staticData));
+
+  }
+  onTrackChange(args: TrackChangeEventArgs) {
+    // Handle track change events
+    console.log('Track Change Details:', {
+      author: 'current user',
+      // type: args.type,
+      time: new Date().toLocaleString(),
+      changes: args
+    });
+  }
+  
   public onFileChange(event: any): void {
     const file = event.target.files[0];
     if (file) {
-      this.convertAndOpenFile(file);  // Call method to convert DOCX to SFDT and open it
+      this.convertAndOpenFile(file);  
     }
   }
 
-  // Method to convert DOCX to SFDT and open in Document Editor
   public convertAndOpenFile(file: File): void {
     const formData = new FormData();
     formData.append('files', file);
 
-    // Syncfusion API endpoint for DOCX to SFDT conversion
     const apiUrl = 'https://api.syncfusion.com/convert/doc-to-sfdt';
     
-    // Call the API to convert the file
     this.http.post(apiUrl, formData, {
       headers: {
         'Authorization': `Bearer ${environment.syncfusionLicenseKey}`,

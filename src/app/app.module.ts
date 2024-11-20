@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DocumentEditorContainerAllModule } from '@syncfusion/ej2-angular-documenteditor';
+import { DocumentEditorContainerAllModule, DocumentEditorContainerModule } from '@syncfusion/ej2-angular-documenteditor';
 import { DocumentEditorComponent } from './component/document-editor/document-editor.component';
 import { ToolbarService } from '@syncfusion/ej2-angular-documenteditor';
 import { HttpClientModule } from '@angular/common/http';
@@ -17,7 +17,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     AppRoutingModule,
     DocumentEditorContainerAllModule,
-    HttpClientModule
+    HttpClientModule,
+    DocumentEditorContainerModule
   ],
   providers: [ToolbarService],
   bootstrap: [AppComponent]

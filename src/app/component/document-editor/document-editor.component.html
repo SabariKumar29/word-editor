@@ -5,11 +5,9 @@
   height="600px"
   style="display:block"
   [enableToolbar]="true"
-  [showPropertiesPane]="true">
+  [showPropertiesPane]="true"
+  [enableTrackChanges]="true"
+  [currentUser]="'John Doe'"
+  (trackChange)="onTrackChange($event)"
+  >
 </ejs-documenteditorcontainer>
-
-<input type="file" (change)="onFileChange($event)" accept=".doc,.docx" />
-<!-- <div>
-    <h4>Changes:</h4>
-    <pre>{{changes | json}}</pre>
-  </div> -->
