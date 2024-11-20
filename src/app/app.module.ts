@@ -3,8 +3,10 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { DocumentEditorContainerModule } from '@syncfusion/ej2-angular-documenteditor';
+import { DocumentEditorContainerAllModule } from '@syncfusion/ej2-angular-documenteditor';
 import { DocumentEditorComponent } from './component/document-editor/document-editor.component';
+import { ToolbarService } from '@syncfusion/ej2-angular-documenteditor';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,9 +16,10 @@ import { DocumentEditorComponent } from './component/document-editor/document-ed
   imports: [
     BrowserModule,
     AppRoutingModule,
-    DocumentEditorContainerModule
+    DocumentEditorContainerAllModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [ToolbarService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,9 +1,15 @@
-<!-- document-editor.component.html -->
 <ejs-documenteditorcontainer
   #documentEditorContainer
-  [serviceUrl]="serviceUrl"
+  id="document-editor"
+  serviceUrl="https://services.syncfusion.com/angular/production/api/documenteditor/"
+  height="600px"
+  style="display:block"
   [enableToolbar]="true"
-  (created)="onCreate()">
+  [showPropertiesPane]="true">
 </ejs-documenteditorcontainer>
-<button (click)="onLoadDefaultDoc()">Load Sample Document</button>
-<input type="file" (change)="onFileChange($event)" />
+
+<input type="file" (change)="onFileChange($event)" accept=".doc,.docx" />
+<div>
+    <h4>Changes:</h4>
+    <pre>{{changes | json}}</pre>
+  </div>
