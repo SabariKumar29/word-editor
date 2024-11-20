@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DocumentEditorContainerComponent } from '@syncfusion/ej2-angular-documenteditor';
 
 @Component({
   selector: 'app-document-editor',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./document-editor.component.scss']
 })
 export class DocumentEditorComponent implements OnInit {
+  @ViewChild('documentEditorContainer')
+  public documentEditorContainer!: DocumentEditorContainerComponent;
 
   constructor() { }
 
@@ -13,7 +16,6 @@ export class DocumentEditorComponent implements OnInit {
   public serviceUrl: string = `${this.hostUrl}api/documenteditor/`;
 
   ngOnInit(): void {
-    
   }
 
   public onCreate(): void {
@@ -27,10 +29,19 @@ export class DocumentEditorComponent implements OnInit {
         const fileReader = new FileReader();
         fileReader.onload = (e: any) => {
           const data = e.target.result as string;
-          (document.querySelector('ejs-documenteditorcontainer') as any).documentEditor.open(data);
+          this.documentEditorContainer.documentEditor.open(data);
         };
-        fileReader.readAsText(blob);
+        fileReader.readAsArrayBuffer(blob);
       });
   }
 
+  public onFileChange(event: any): void {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e: any) => {
+      const content = e.target.result;
+      this.documentEditorContainer.documentEditor.open(content);
+    };
+    reader.readAsArrayBuffer(file);
+  }
 }

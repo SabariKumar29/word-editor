@@ -1,7 +1,9 @@
+<!-- document-editor.component.html -->
 <ejs-documenteditorcontainer
-  #documentEditorContainer 
-  [serviceUrl]="serviceUrl" 
+  #documentEditorContainer
+  [serviceUrl]="serviceUrl"
   [enableToolbar]="true"
   (created)="onCreate()">
 </ejs-documenteditorcontainer>
 <button (click)="onLoadDefaultDoc()">Load Sample Document</button>
+<input type="file" (change)="onFileChange($event)" />
