@@ -3,14 +3,18 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { DocumentEditorContainerModule } from '@syncfusion/ej2-angular-documenteditor';
+import { DocumentEditorComponent } from './component/document-editor/document-editor.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    DocumentEditorComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    DocumentEditorContainerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
