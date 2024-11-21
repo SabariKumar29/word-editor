@@ -22,19 +22,11 @@ export class DocumentEditorComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    // setTimeout(() => {
-    //   this.loadDocumentFromJson();
-    // }, 200);
-    const documenteditor=this.documentEditorContainer.documentEditor;
-    documenteditor.contentChange=this.onContentChange.bind(this);
+    // const documenteditor=this.documentEditorContainer.documentEditor;
+    // documenteditor.contentChange=this.onContentChange.bind(this);
 
     
   }
-
-  // private loadDocumentFromJson(): void {
-  //   this.documentEditorContainer.documentEditor.open(JSON.stringify(staticData));
-
-  // }
  
   onContentChange(event: any) {
     console.log('content has been changed !',event)
@@ -44,36 +36,36 @@ export class DocumentEditorComponent implements OnInit {
 
  
   
-  public onFileChange(event: any): void {
-    const file = event.target.files[0];
-    if (file) {
-      this.convertAndOpenFile(file);  
-    }
-  }
+  // public onFileChange(event: any): void {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     this.convertAndOpenFile(file);  
+  //   }
+  // }
 
-  public convertAndOpenFile(file: File): void {
-    const formData = new FormData();
-    formData.append('files', file);
+  // public convertAndOpenFile(file: File): void {
+  //   const formData = new FormData();
+  //   formData.append('files', file);
 
-   // const apiUrl = 'https://ej2services.syncfusion.com/production/web-services/api/documenteditor/Import/';
+  //  // const apiUrl = 'https://ej2services.syncfusion.com/production/web-services/api/documenteditor/Import/';
     
-    this.http.post(this.documentEditorContainer.serviceUrl+'Import', formData, {
-      headers: {
-        'Authorization': `Bearer ${environment.syncfusionLicenseKey}`,
-      },
-      responseType: 'text'
-    }).subscribe(
-      (sfdt: string) => {
-        this.documentEditorContainer?.documentEditor.open(sfdt);
-      },
-      (error) => {
-        console.error('Error during conversion:', error);
-        if (error.status === 0) {
-          console.error('Network error or CORS issue');
-        } else {
-          console.error('API error:', error.status, error.message);
-        }
-      }
-    );
-  }
+  //   this.http.post(this.documentEditorContainer.serviceUrl+'Import', formData, {
+  //     headers: {
+  //       'Authorization': `Bearer ${environment.syncfusionLicenseKey}`,
+  //     },
+  //     responseType: 'text'
+  //   }).subscribe(
+  //     (sfdt: string) => {
+  //       this.documentEditorContainer?.documentEditor.open(sfdt);
+  //     },
+  //     (error) => {
+  //       console.error('Error during conversion:', error);
+  //       if (error.status === 0) {
+  //         console.error('Network error or CORS issue');
+  //       } else {
+  //         console.error('API error:', error.status, error.message);
+  //       }
+  //     }
+    // );
+  // }
 }
