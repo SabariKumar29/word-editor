@@ -1,8 +1,17 @@
+.header{
+  display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 50px;
+
+}
 ejs-documenteditorcontainer {
-    // height: 600px;
     border: 1px solid #ccc;
     margin: 1em 0;
   }
+  // .e-de-tool-ctnr-properties-pane{
+  //   min-height: 100%;
+  // }
 
   .file-upload-btn {
     display: inline-block;
@@ -26,4 +35,9 @@ ejs-documenteditorcontainer {
   .file-upload-btn input[type="file"] {
     display: none; 
   }
-  
+  .e-documenteditor-optionspane{
+    height: 100%;
+    #document-editor_editor_viewerContainer{
+      height: 100% !important;
+    }
+  }

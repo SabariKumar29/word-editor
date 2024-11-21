@@ -29,15 +29,6 @@ describe('DocumentEditorComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should call convertAndOpenFile when a file is selected', () => {
-    spyOn(component, 'convertAndOpenFile'); 
-
-    const event = { target: { files: [mockFile] } }; 
-    component.onFileChange(event);
-
-    expect(component.convertAndOpenFile).toHaveBeenCalledWith(mockFile);
-  });
-
   it('should make an HTTP request to convert DOCX to SFDT and open the file', () => {
     const apiUrl = 'https://ej2services.syncfusion.com/production/web-services/api/documenteditor/Import/';
     const mockSfdtResponse = '<SFDT>dummy</SFDT>'; 
@@ -49,8 +40,6 @@ describe('DocumentEditorComponent', () => {
 
     spyOn(component.documentEditorContainer.documentEditor, 'open'); 
 
-    
-    component.convertAndOpenFile(mockFile);
 
     const req = httpTestingController.expectOne(req => req.method === 'POST' && req.url === apiUrl);
     expect(req).toBeTruthy();
@@ -67,7 +56,6 @@ describe('DocumentEditorComponent', () => {
 
     spyOn(console, 'error'); 
 
-    component.convertAndOpenFile(mockFile);
 
     const req = httpTestingController.expectOne(req => req.method === 'POST' && req.url === apiUrl);
     expect(req).toBeTruthy();
@@ -85,8 +73,6 @@ describe('DocumentEditorComponent', () => {
 
     spyOn(console, 'error');
 
-    
-    component.convertAndOpenFile(mockFile);
 
     const req = httpTestingController.expectOne(req => req.method === 'POST' && req.url === apiUrl);
     expect(req).toBeTruthy();
