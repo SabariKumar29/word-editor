@@ -10,34 +10,39 @@ import {staticData} from '../../../../src/data-default';
   styleUrls: ['./document-editor.component.scss']
 })
 export class DocumentEditorComponent implements OnInit {
+
   @ViewChild('documentEditorContainer') documentEditorContainer!: DocumentEditorContainerComponent;
 
   constructor(private http: HttpClient) {}
 
   ngOnInit(): void {
-  //   this.documentEditorContainer.documentEditor.currentUser = 'John Doe';
-  // this.documentEditorContainer.documentEditor.enableTrackChanges = true;
+    // this.documentEditorContainer.serviceUrl='https://ej2services.syncfusion.com/production/web-services/api/documenteditor/',
+    // this.documentEditorContainer.locale='en-US'
+ 
   }
 
   ngAfterViewInit(): void {
-    setTimeout(() => {
-      this.loadDocumentFromJson();
-    }, 200);
+    // setTimeout(() => {
+    //   this.loadDocumentFromJson();
+    // }, 200);
+    const documenteditor=this.documentEditorContainer.documentEditor;
+    documenteditor.contentChange=this.onContentChange.bind(this);
+
+    
   }
 
-  private loadDocumentFromJson(): void {
-    this.documentEditorContainer.documentEditor.open(JSON.stringify(staticData));
+  // private loadDocumentFromJson(): void {
+  //   this.documentEditorContainer.documentEditor.open(JSON.stringify(staticData));
 
+  // }
+ 
+  onContentChange(event: any) {
+    console.log('content has been changed !',event)
+    const content = this.documentEditorContainer.documentEditor.serialize();
+    console.log('Current Document Content:', content);
   }
-  onTrackChange(args: TrackChangeEventArgs) {
-    // Handle track change events
-    console.log('Track Change Details:', {
-      author: 'current user',
-      // type: args.type,
-      time: new Date().toLocaleString(),
-      changes: args
-    });
-  }
+
+ 
   
   public onFileChange(event: any): void {
     const file = event.target.files[0];
@@ -50,9 +55,9 @@ export class DocumentEditorComponent implements OnInit {
     const formData = new FormData();
     formData.append('files', file);
 
-    const apiUrl = 'https://api.syncfusion.com/convert/doc-to-sfdt';
+   // const apiUrl = 'https://ej2services.syncfusion.com/production/web-services/api/documenteditor/Import/';
     
-    this.http.post(apiUrl, formData, {
+    this.http.post(this.documentEditorContainer.serviceUrl+'Import', formData, {
       headers: {
         'Authorization': `Bearer ${environment.syncfusionLicenseKey}`,
       },

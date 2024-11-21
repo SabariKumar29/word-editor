@@ -8,6 +8,13 @@
   [showPropertiesPane]="true"
   [enableTrackChanges]="true"
   [currentUser]="'John Doe'"
-  (trackChange)="onTrackChange($event)"
+  
   >
 </ejs-documenteditorcontainer>
+
+<label class="file-upload-btn">
+    <input type="file" (change)="onFileChange($event)" accept=".doc,.docx" />
+    Upload Document
+  </label>
+  
+
